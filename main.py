@@ -11,6 +11,26 @@ def draw_tile(x,y,terrain):
     color = terrain_to_color[terrain]
     pygame.draw.polygon(screen,color,[(x,y),(x-50,y-25),(x-50,y-75),(x,y-100),(x+50,y-75),(x+50,y-25)])
 
+def draw_board(x,y,terrains):
+    draw_tile(x,y,terrains[0])
+    draw_tile(x+100,y,terrains[1])
+    draw_tile(x+200,y,terrains[2])
+    draw_tile(x-50,y+75,terrains[3])
+    draw_tile(x+50,y+75,terrains[4])
+    draw_tile(x+150,y+75,terrains[5])
+    draw_tile(x+250,y+75,terrains[6])
+    draw_tile(x-100,y+150,terrains[7])
+    draw_tile(x,y+150,terrains[8])
+    draw_tile(x+100,y+150,terrains[9])
+    draw_tile(x+200,y+150,terrains[10])
+    draw_tile(x+300,y+150,terrains[11])
+    draw_tile(x-50,y+225,terrains[12])
+    draw_tile(x+50,y+225,terrains[13])
+    draw_tile(x+150,y+225,terrains[14])
+    draw_tile(x+250,y+225,terrains[15])
+    draw_tile(x,y+300,terrains[16])
+    draw_tile(x+100,y+300,terrains[17])
+    draw_tile(x+200,y+300,terrains[18])
 
 while running:
     # poll for events
@@ -24,26 +44,8 @@ while running:
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("aqua")
+    draw_board(200,175,[])
     #pygame.draw.polygon(screen,"black",[(200,175),(150,150),(150,100),(200,75),(250,100),(250,150)])
-    draw_tile(200,175,"Mountains")
-    draw_tile(300,175,"Hills")
-    draw_tile(400,175,"Forest")
-    draw_tile(150,250,"Fields")
-    draw_tile(250,250,"Pasture")
-    draw_tile(350,250,"Desert")
-    draw_tile(450,250,"Mountains")
-    draw_tile(100,325,"Hills")
-    draw_tile(200,325,"Forest")
-    draw_tile(300,325,"Fields")
-    draw_tile(400,325,"Pasture")
-    draw_tile(500,325,"Desert")
-    draw_tile(150,400,"Fields")
-    draw_tile(250,400,"Pasture")
-    draw_tile(350,400,"Desert")
-    draw_tile(450,400,"Mountains")
-    draw_tile(200,475,"Mountains")
-    draw_tile(300,475,"Hills")
-    draw_tile(400,475,"Forest")
     # RENDER YOUR GAME HERE
 
     # flip() the display to put your work on screen
