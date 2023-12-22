@@ -10,8 +10,10 @@ def draw_tile(x,y,terrain):
     terrain_to_color = {"Mountains":"gray","Hills":"red","Forest":"darkgreen","Fields":"yellow","Pasture":"yellowgreen","Desert":"navajowhite"}
     color = terrain_to_color[terrain]
     pygame.draw.polygon(screen,color,[(x,y),(x-50,y-25),(x-50,y-75),(x,y-100),(x+50,y-75),(x+50,y-25)])
+    pygame.draw.polygon(screen,"black",[(x,y),(x-50,y-25),(x-50,y-75),(x,y-100),(x+50,y-75),(x+50,y-25)],4)
 
 def draw_board(x,y,terrains):
+    terrains = ["Forest"]*19
     draw_tile(x,y,terrains[0])
     draw_tile(x+100,y,terrains[1])
     draw_tile(x+200,y,terrains[2])
@@ -31,6 +33,20 @@ def draw_board(x,y,terrains):
     draw_tile(x,y+300,terrains[16])
     draw_tile(x+100,y+300,terrains[17])
     draw_tile(x+200,y+300,terrains[18])
+    pygame.draw.circle(screen,"red",(20,20),5)
+    array_tile(150,100,3)
+
+def array_tile(x,y,r):
+    #150,100
+    result = []
+    result.append((x,y))
+    for i in range(r):
+        result.append((x+50,y-25))
+        result.append((x+100,y))
+        x +=100 
+    for c in result:
+        pygame.draw.circle(screen,"red",(c[0],c[1]),5)
+
 
 while running:
     # poll for events
