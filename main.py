@@ -16,6 +16,9 @@ while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONUP:
+            pos = pygame.mouse.get_pos()
+            print(pos)
         if event.type == pygame.QUIT:
             running = False
 
@@ -23,11 +26,24 @@ while running:
     screen.fill("aqua")
     #pygame.draw.polygon(screen,"black",[(200,175),(150,150),(150,100),(200,75),(250,100),(250,150)])
     draw_tile(200,175,"Mountains")
-    draw_tile(250,175,"Hills")
-    draw_tile(300,175,"Forest")
-    draw_tile(350,175,"Fields")
-    draw_tile(400,175,"Pasture")
-    draw_tile(450,175,"Desert")
+    draw_tile(300,175,"Hills")
+    draw_tile(400,175,"Forest")
+    draw_tile(150,250,"Fields")
+    draw_tile(250,250,"Pasture")
+    draw_tile(350,250,"Desert")
+    draw_tile(450,250,"Mountains")
+    draw_tile(100,325,"Hills")
+    draw_tile(200,325,"Forest")
+    draw_tile(300,325,"Fields")
+    draw_tile(400,325,"Pasture")
+    draw_tile(500,325,"Desert")
+    draw_tile(150,400,"Fields")
+    draw_tile(250,400,"Pasture")
+    draw_tile(350,400,"Desert")
+    draw_tile(450,400,"Mountains")
+    draw_tile(200,475,"Mountains")
+    draw_tile(300,475,"Hills")
+    draw_tile(400,475,"Forest")
     # RENDER YOUR GAME HERE
 
     # flip() the display to put your work on screen
