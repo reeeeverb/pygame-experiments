@@ -34,18 +34,29 @@ def draw_board(x,y,terrains):
     draw_tile(x+100,y+300,terrains[17])
     draw_tile(x+200,y+300,terrains[18])
     pygame.draw.circle(screen,"red",(20,20),5)
-    array_tile(150,100,3)
-
-def array_tile(x,y,r):
+    out = []
+    out+=(array_tile(150,100,3))
+    out+=(array_tile(100,175,4))
+    out+=(array_tile(50,250,5))
+    out+=(array_tile(50,300,5,True))
+    out+=(array_tile(100,375,4,True))
+    out+=(array_tile(150,450,3,True))
+    print(len(out))
+def array_tile(x,y,r,inverted=False):
     #150,100
     result = []
     result.append((x,y))
     for i in range(r):
-        result.append((x+50,y-25))
-        result.append((x+100,y))
+        if inverted:
+            result.append((x+50,y+25))
+            result.append((x+100,y))
+        else:  
+            result.append((x+50,y-25))
+            result.append((x+100,y))
         x +=100 
     for c in result:
         pygame.draw.circle(screen,"red",(c[0],c[1]),5)
+    return result
 
 
 while running:
