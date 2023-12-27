@@ -70,7 +70,7 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
             clicked = [s for s in corners if s.collidepoint(pos)]
-            print(corners.index(clicked[0]))
+            print(corners.index(clicked[0]) if len(clicked) == 1 else "Invalid Location")
         if event.type == pygame.QUIT:
             running = False
     # fill the screen with a color to wipe away anything from last frame
