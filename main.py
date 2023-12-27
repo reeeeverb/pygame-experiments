@@ -33,7 +33,7 @@ def draw_board(x,y,terrains):
     draw_tile(x,y+300,terrains[16])
     draw_tile(x+100,y+300,terrains[17])
     draw_tile(x+200,y+300,terrains[18])
-    print(len(array_board(x,y)))
+    return array_board(x,y)
 def array_board(x,y):
     out = []
     out+=(array_tile(x-50,y-75,3))
@@ -46,6 +46,7 @@ def array_board(x,y):
 def array_tile(x,y,r,inverted=False):
     #150,100
     result = []
+    sprites = []
     result.append((x,y))
     for i in range(r):
         if inverted:
@@ -56,23 +57,25 @@ def array_tile(x,y,r,inverted=False):
             result.append((x+100,y))
         x +=100 
     for c in result:
-        pygame.draw.circle(screen,"red",(c[0],c[1]),5)
-    return result
+        s = pygame.draw.circle(screen,"red",(c[0],c[1]),5)
+        sprites.append(s)
+    return sprites
 
 
+corners = []
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
-            print(pos)
+            clicked = [s for s in corners if s.collidepoint(pos)]
+            print(corners.index(clicked[0]))
         if event.type == pygame.QUIT:
             running = False
-
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("aqua")
-    draw_board(200,175,[])
+    corners = draw_board(200,175,[])
     #pygame.draw.polygon(screen,"black",[(200,175),(150,150),(150,100),(200,75),(250,100),(250,150)])
     # RENDER YOUR GAME HERE
 
