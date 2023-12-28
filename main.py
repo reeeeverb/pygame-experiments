@@ -104,13 +104,15 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
             print(pos)
-            clicked = [s for s in corners if s.collidepoint(pos)]
-            print(corners.index(clicked[0]) if len(clicked) == 1 else "Invalid Location")
+            corner_clicked = [s for s in corners if s.collidepoint(pos)]
+            print("corner:"+str(corners.index(corner_clicked[0])) if len(corner_clicked) == 1 else "Invalid Location")
+            edge_clicked = [s for s in edges if s.collidepoint(pos)]
+            print("edges:"+str(edges.index(edge_clicked[0])) if len(edge_clicked) == 1 else "Invalid Location")
         if event.type == pygame.QUIT:
             running = False
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("aqua")
-    corners = draw_board(200,175,[])
+    corners,edges = draw_board(200,175,[])
     #pygame.draw.polygon(screen,"black",[(200,175),(150,150),(150,100),(200,75),(250,100),(250,150)])
     # RENDER YOUR GAME HERE
 
