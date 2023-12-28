@@ -33,17 +33,51 @@ def draw_board(x,y,terrains):
     draw_tile(x,y+300,terrains[16])
     draw_tile(x+100,y+300,terrains[17])
     draw_tile(x+200,y+300,terrains[18])
-    return array_board(x,y)
-def array_board(x,y):
+    return board_corners(x,y), board_edges(x,y)
+def board_corners(x,y):
     out = []
-    out+=(array_tile(x-50,y-75,3))
-    out+=(array_tile(x-100,y,4))
-    out+=(array_tile(x-150,y+75,5))
-    out+=(array_tile(x-150,y+125,5,True))
-    out+=(array_tile(x-100,y+200,4,True))
-    out+=(array_tile(x-50,y+275,3,True))
+    out+=(tile_corners(x-50,y-75,3))
+    out+=(tile_corners(x-100,y,4))
+    out+=(tile_corners(x-150,y+75,5))
+    out+=(tile_corners(x-150,y+125,5,True))
+    out+=(tile_corners(x-100,y+200,4,True))
+    out+=(tile_corners(x-50,y+275,3,True))
     return out
-def array_tile(x,y,r,inverted=False):
+def board_edges(x,y):
+    out = []
+    out+=(tile_edges(x-50,y-75,3))
+    out+=(tile_edges(x-50,y-75,3,vertical=True))
+    out+=(tile_edges(x-100,y,4))
+    out+=(tile_edges(x-100,y,4,vertical=True))
+    out+=(tile_edges(x-150,y+75,5))
+    out+=(tile_edges(x-150,y+75,5,vertical=True))
+    out+=(tile_edges(x-150,y+125,5,inverted = True))
+    out+=(tile_edges(x-100,y+150,4,vertical = True))
+    out+=(tile_edges(x-100,y+200,4,inverted = True))
+    out+=(tile_edges(x-50,y+225,3,vertical = True))
+    out+=(tile_edges(x-50,y+275,3,inverted = True))
+    return out
+def tile_edges(x,y,r,inverted = False, vertical=False):
+    result = []
+    sprites = []
+    for i in range(r):
+        if inverted:
+            result.append(((x,y),(x+50,y+25)))
+            result.append(((x+50,y+25),(x+100,y)))
+        elif vertical:
+            result.append(((x,y),(x,y+50)))
+        else:  
+            result.append(((x,y),(x+50,y-25)))
+            result.append(((x+50,y-25),(x+100,y)))
+        x +=100 
+    if vertical:
+        result.append(((x,y),(x,y+50)))
+    for fir in result:
+        s = pygame.draw.line(screen,"red",fir[0],fir[1],5)
+        sprites.append(s)
+    return sprites
+
+def tile_corners(x,y,r,inverted=False):
     #150,100
     result = []
     sprites = []
@@ -69,6 +103,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
+            print(pos)
             clicked = [s for s in corners if s.collidepoint(pos)]
             print(corners.index(clicked[0]) if len(clicked) == 1 else "Invalid Location")
         if event.type == pygame.QUIT:
